@@ -11,7 +11,7 @@ from modules import d2lCustom as custom
 
 
 def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch = 12, train accuracy = 0.850
+    # epoch = 11, train accuracy = 0.849
     # if eps=1e-3, learning rate = 0.1
 
     lr = 0.1
@@ -29,6 +29,9 @@ def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
 
 
 def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
+    # epoch = 10, train accuracy = 0.848
+    # if eps=1e-3, learning rate = 0.1
+
     net = nn.Sequential(
             OrderedDict([
                 ('flatten', custom.FlattenLayer()),
@@ -45,7 +48,7 @@ def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
 
     fmnist.train(net, train_iter, test_iter, loss, eps, batch_size, None, None, optimizer)
 
-    return net.parameters()
+    return net
 
 
 def main():
@@ -54,16 +57,15 @@ def main():
     num_inputs = 784
     num_outputs = 10
 
-    # eps = 1e-3
-    eps = 1e-1
+    eps = 1e-3
+    # eps = 1e-1
 
     root = './Datasets'
     train_iter, test_iter = fmnist.load_data(batch_size, root=root)
 
     mode = eval(input('0[Scratch Version], 1[Custom Version]: '))
     if mode:
-        dic = custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
-        params = dic['conv1.weight']
+        cus_net = custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
     else:
         params = scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
 
@@ -71,7 +73,11 @@ def main():
     X, y = next(iter(test_iter))
 
     true_labels = fmnist.get_labels(y.numpy())
-    pred_labels = fmnist.get_labels(scratch.softmax_regression(X, params).argmax(dim=1).numpy())
+
+    if mode:
+        pred_labels = fmnist.get_labels(scratch.softmax_regression(X, cus_net).argmax(dim=1).numpy())
+    else:
+        pred_labels = fmnist.get_labels(scratch.softmax_regression(X, params=params).argmax(dim=1).numpy())
 
     titles = []
     for true, pred in zip(true_labels, pred_labels):

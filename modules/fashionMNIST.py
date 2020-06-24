@@ -52,17 +52,17 @@ def load_data(batch_size, resize=None, root='../'):
 
 
 def train(net, train_iter, test_iter, loss, eps, batch_size, params=None, lr=None, optimizer=None):
-    train_accrate = 0
+    train_acc_rate = 0
     epoch = 0
 
     while True:
         train_loss_sum, train_acc_sum, n = .0, .0, 0
 
         for X, y in train_iter:
-            if params == None:
+            if params is None:
                 y_hat = net(X)
             else:
-                y_hat = net(X, params)
+                y_hat = net(X, params=params)
             ls = loss(y_hat, y).sum()
 
             # reset gradient
@@ -86,11 +86,11 @@ def train(net, train_iter, test_iter, loss, eps, batch_size, params=None, lr=Non
         print('epoch %d, loss %.4f, train acc %.3f, test acc %.3f'
               % (epoch + 1, train_loss_sum / n, train_acc_sum / n, test_acc))
 
-        if abs(train_acc_sum / n - train_accrate) < eps:
+        if abs(train_acc_sum / n - train_acc_rate) < eps:
             break
         else:
             epoch += 1
-            train_accrate = train_acc_sum / n
+            train_acc_rate = train_acc_sum / n
 
 
 def test():
@@ -99,7 +99,7 @@ def test():
     num_inputs = 784
     num_outputs = 10
 
-    eps, lr = 5, 0.1
+    # eps, lr = 5, 0.1
 
     root = '../Datasets'
     train_iter, test_iter = load_data(batch_size=batch_size, root=root)
