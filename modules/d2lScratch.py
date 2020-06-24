@@ -37,10 +37,9 @@ def softmax(X):
     return X_exp/partition
 
 
-def softmax_regression(X, W, b, num_inputs=None):
-    if num_inputs==None:
-        num_inputs=X.shape[0]
-    return softmax(torch.mm(X.view(-1, num_inputs), W) + b)
+def softmax_regression(X, params=None):  # params = [W, b]
+    num_inputs = X.shape[-1] * X.shape[-2]
+    return softmax(torch.mm(X.view(-1, num_inputs), params[0]) + params[1])
 
 
 # loss
@@ -60,11 +59,11 @@ def sgd(params, lr, batch_size):
 
 
 # evaluate
-def accuracy(data_iter, net):
+def accuracy(data_iter, net, params):
     acc_sum, n = .0, 0
     for X, y in data_iter:
-        acc_sum += (net(X).argmax(dim=1) == y).float().sum().item()
+        acc_sum += (net(X, params).argmax(dim=1) == y).float().sum().item()
         n += y.shape[0]
-    return acc_sum/n
+    return acc_sum / n
 
 # train
