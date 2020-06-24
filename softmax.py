@@ -11,7 +11,7 @@ from modules import d2lCustom as custom
 
 
 def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch = 11, train accuracy = 0.849
+    # epoch 9, loss 0.4533, train acc 0.846, test acc 0.833
     # if eps=1e-3, learning rate = 0.1
 
     lr = 0.1
@@ -29,7 +29,7 @@ def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
 
 
 def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch = 10, train accuracy = 0.848
+    # epoch 12, loss 0.0017, train acc 0.850, test acc 0.813
     # if eps=1e-3, learning rate = 0.1
 
     net = nn.Sequential(

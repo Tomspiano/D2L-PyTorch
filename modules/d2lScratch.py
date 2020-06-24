@@ -40,11 +40,18 @@ def softmax(X):
     return X_exp / partition
 
 
-def softmax_regression(X, net=None, params=None):
-    num_inputs = X.shape[-1] * X.shape[-2]
+def softmax_regression(X, net=None, params=None):  # params = [W, b]
     if params is None:
         return softmax(net(X))
+    num_inputs = X.shape[-1] * X.shape[-2]
     return softmax(torch.mm(X.view(-1, num_inputs), params[0]) + params[1])
+
+
+## multilayer perceptron
+def mlp(X, params=None):  # params = [W1, b1, W1, b1]
+    num_inputs = X.shape[-1] * X.shape[-2]
+    H = relu(torch.mm(X.view(-1, num_inputs), params[0]) + params[1])
+    return torch.mm(H, params[2]) + params[3]
 
 
 # loss
@@ -74,4 +81,7 @@ def accuracy(data_iter, net, params=None):
         n += y.shape[0]
     return acc_sum / n
 
-# train
+
+# activation function
+def relu(X):
+    return torch.max(X, torch.zeros(X.shape, dtype=torch.float))
