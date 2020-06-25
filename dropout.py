@@ -9,18 +9,29 @@ from torch.nn import init
 from modules import d2lCustom as custom
 
 
+# overfitting
+## inverted_dropout
+
 def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size):
     # epoch 10, loss 0.0012, train acc 0.885, test acc 0.849
     # if eps=1e-3, learning rate = 128 (0.5)
 
     lr = 0.5 * batch_size
 
-    W1 = torch.tensor(np.random.normal(0, .01, (num_inputs, num_hiddens)), dtype=torch.float, requires_grad=True)
-    b1 = torch.zeros(num_hiddens, dtype=torch.float, requires_grad=True)
-    W2 = torch.tensor(np.random.normal(0, .01, (num_hiddens, num_outputs)), dtype=torch.float, requires_grad=True)
-    b2 = torch.zeros(num_outputs, dtype=torch.float, requires_grad=True)
+    params = []
+    pre_nrows = num_inputs
+    cnt = len(num_hiddens) + 1
+    for i in range(cnt):
+        if i == cnt - 1:
+            Wt = torch.tensor(np.random.normal(0, .01, (pre_nrows, num_outputs)), dtype=torch.float, requires_grad=True)
+            bt = torch.zeros(num_outputs, dtype=torch.float, requires_grad=True)
+        else:
+            Wt = torch.tensor(np.random.normal(0, .01, (pre_nrows, num_hiddens[i])), dtype=torch.float,
+                              requires_grad=True)
+            bt = torch.zeros(num_hiddens[i], dtype=torch.float, requires_grad=True)
 
-    params = [W1, b1, W2, b2]
+        params += [Wt, bt]
+        pre_nrows = num_hiddens[i]
 
     loss = nn.CrossEntropyLoss()
 
@@ -53,7 +64,8 @@ def main():
 
     num_inputs = 784
     num_outputs = 10
-    num_hiddens = 256
+    num_hiddens = [256, 256]
+    drop_prob = [.2, .5]
 
     eps = 1e-3
     # eps = 1e-1

@@ -1,9 +1,16 @@
 <component name="ProjectDictionaryState">
   <dictionary name="28971">
     <words>
+      <w>dataset</w>
+      <w>figsize</w>
+      <w>fmnist</w>
       <w>hiddens</w>
       <w>mnist</w>
+      <w>ncols</w>
+      <w>nrows</w>
+      <w>overfitting</w>
       <w>perceptron</w>
+      <w>relu</w>
       <w>softmax</w>
     </words>
   </dictionary>

@@ -4,7 +4,7 @@ from modules import fashionMNIST as fmnist
 
 from modules import d2lScratch as scratch
 
-import torch.nn as nn
+from torch import nn
 from torch.nn import init
 from collections import OrderedDict
 from modules import d2lCustom as custom
