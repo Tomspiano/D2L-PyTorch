@@ -15,16 +15,21 @@ def relu(X):
 
 # net
 ## linear regression
-def linear_regression(X, w, b):
-    return torch.mm(X, w) + b
+class LinearNet:
+    def __init__(self, params):
+        self.params = params  # params = [w, b]
+
+    def net(self, X):
+        return torch.mm(X, self.params[0]) + self.params[1]
 
 
 ## softmax regression
-class SoftmaxNet():
+class SoftmaxNet:
     def __init__(self, params):
         self.params = params  # params = [W, b]
 
-    def softmax(self, X):
+    @staticmethod
+    def softmax(X):
         X_exp = X.exp()
         partition = X_exp.sum(dim=1, keepdim=True)
         return X_exp / partition
@@ -34,26 +39,8 @@ class SoftmaxNet():
         return self.softmax(torch.mm(X.view(-1, num_inputs), self.params[0]) + self.params[1])
 
 
-## inverted dropout
-def inverted_dropout(X, params, drop_prob, is_training=True):  # params = [W1, b1, W2, b2, ...]
-    num_inputs = X.shape[-1] * X.shape[-2]
-
-    H = []
-    pre_mat = X.view(-1, num_inputs)
-    cnt = len(drop_prob)
-    for i in range(cnt):
-        Ht = (torch.matmul(pre_mat, params[2 * i]) + params[2 * i + 1]).relu()
-        if is_training:
-            Ht = dropout(Ht, drop_prob[i])
-
-        H.append(Ht)
-        pre_mat = Ht
-
-    return torch.matmul(H[-1], params[-2]) + params[-1]
-
-
 ## multilayer perceptron
-class MLPNet():
+class MLPNet:
     def __init__(self, params):
         self.params = params  # params = [W1, b1, W2, b2]
 
@@ -61,6 +48,42 @@ class MLPNet():
         num_inputs = X.shape[-1] * X.shape[-2]
         H = relu(torch.matmul(X.view(-1, num_inputs), self.params[0]) + self.params[1])
         return torch.matmul(H, self.params[2]) + self.params[3]
+
+
+## inverted dropout
+class DropoutNet:
+    def __init__(self, params, drop_prob):
+        self.params = params  # params = [W1, b1, W2, b2, ...]
+        self.drop_prob = drop_prob
+
+    @staticmethod
+    def dropout(X, drop_prob):
+        assert 0 <= drop_prob <= 1
+
+        X = X.float()
+        keep_prob = 1 - drop_prob
+
+        if keep_prob == 0:
+            return torch.zeros_like(X)
+
+        mask = (torch.rand(X.shape) < keep_prob).float()
+        return mask * X / keep_prob
+
+    def net(self, X, is_training=True):
+        num_inputs = X.shape[-1] * X.shape[-2]
+
+        H = []
+        pre_mat = X.view(-1, num_inputs)
+        cnt = len(self.drop_prob)
+        for i in range(cnt):
+            Ht = (torch.matmul(pre_mat, self.params[2 * i]) + self.params[2 * i + 1]).relu()
+            if is_training:
+                Ht = self.dropout(Ht, self.drop_prob[i])
+
+            H.append(Ht)
+            pre_mat = Ht
+
+        return torch.matmul(H[-1], self.params[-2]) + self.params[-1]
 
 
 # loss
@@ -77,19 +100,6 @@ def cross_entropy(y_hat, y):
 def l2_penalty(w):
     return (w**2).sum() / 2
 
-
-## dropout
-def dropout(X, drop_prob):
-    assert 0 <= drop_prob <= 1
-
-    X = X.float()
-    keep_prob = 1 - drop_prob
-
-    if keep_prob == 0:
-        return torch.zeros_like(X)
-
-    mask = (torch.rand(X.shape) < keep_prob).float()
-    return mask * X / keep_prob
 
 
 # optimize

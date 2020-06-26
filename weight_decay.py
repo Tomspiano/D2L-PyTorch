@@ -2,10 +2,12 @@ import torch
 from torch import nn
 import torch.utils.data as Data
 import numpy as np
+from modules import base
 from modules import d2lScratch as scratch
 
 
 # overfitting
+
 def weight_decay_fit(num_inputs, train_iter, train_features, test_features, train_labels, test_labels, loss, num_epochs,
                      lr, wd):
     net = nn.Linear(num_inputs, 1)
@@ -32,9 +34,9 @@ def weight_decay_fit(num_inputs, train_iter, train_features, test_features, trai
         test_ls.append(loss(net(test_features), test_labels).mean().item())
 
     print('L2 norm of w: ', net.weight.data.norm().item())
-    scratch.semilogy(range(1, num_epochs + 1), train_ls, 'epochs', 'loss',
-                     range(1, num_epochs + 1), test_ls, ['train', 'test'],
-                     figsize=(10, 8))
+    base.semilogy(range(1, num_epochs + 1), train_ls, 'epochs', 'loss',
+                  range(1, num_epochs + 1), test_ls, ['train', 'test'],
+                  figsize=(10, 8))
 
 
 def main():

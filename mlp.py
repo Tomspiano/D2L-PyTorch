@@ -48,7 +48,7 @@ def custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps,
 
     optimizer = torch.optim.SGD(net.parameters(), lr=.5)
 
-    base.train(net, train_iter, test_iter, loss, eps, batch_size, None, None, optimizer)
+    base.train(net, train_iter, test_iter, loss, eps, batch_size, optimizer=optimizer)
 
 
 def main():

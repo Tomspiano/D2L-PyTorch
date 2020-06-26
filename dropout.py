@@ -1,19 +1,21 @@
 import torch
 import numpy as np
+from modules import base
 from modules import fashionMNIST as fmnist
 
 from modules import d2lScratch as scratch
 
 from torch import nn
 from torch.nn import init
+from collections import OrderedDict
 from modules import d2lCustom as custom
 
 
 # overfitting
 ## inverted_dropout
 
-def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 10, loss 0.0012, train acc 0.885, test acc 0.849
+def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size, drop_prob):
+    # epoch 16, loss 0.0012, train acc 0.885, test acc 0.860
     # if eps=1e-3, learning rate = 128 (0.5)
 
     lr = 0.5 * batch_size
@@ -31,23 +33,33 @@ def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps
             bt = torch.zeros(num_hiddens[i], dtype=torch.float, requires_grad=True)
 
         params += [Wt, bt]
-        pre_nrows = num_hiddens[i]
+        if i != cnt - 1:
+            pre_nrows = num_hiddens[i]
+
+    dropout = scratch.DropoutNet(params, drop_prob)
 
     loss = nn.CrossEntropyLoss()
 
-    fmnist.train(scratch.mlp, train_iter, test_iter, loss, eps, batch_size, params, lr)
+    base.train(dropout.net, train_iter, test_iter, loss, eps, batch_size, params, lr)
 
 
-def custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 16, loss 0.0010, train acc 0.900, test acc 0.875
+def custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size, drop_prob):
+    # epoch 13, loss 0.0013, train acc 0.880, test acc 0.872
     # if eps=1e-3, learning rate = 0.5
 
-    net = nn.Sequential(
-            custom.FlattenLayer(),
-            nn.Linear(num_inputs, num_hiddens),
-            nn.ReLU(),
-            nn.Linear(num_hiddens, num_outputs)
-    )
+    cnt = len(num_hiddens) + 1
+    od = OrderedDict()
+    od['flatten'] = custom.FlattenLayer()
+    od['linear_0'] = nn.Linear(num_inputs, num_hiddens[0])
+    for i in range(1, cnt):
+        od['relu_%d' % i] = nn.ReLU()
+        od['dropout_%d' % i] = nn.Dropout(drop_prob[i - 1])
+        if i == cnt - 1:
+            od['linear_%d' % i] = nn.Linear(num_hiddens[i - 1], num_outputs)
+        else:
+            od['linear_%d' % i] = nn.Linear(num_hiddens[i - 1], num_hiddens[i])
+
+    net = nn.Sequential(od)
 
     for params in net.parameters():
         init.normal_(params, mean=0, std=.01)
@@ -56,15 +68,13 @@ def custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps,
 
     optimizer = torch.optim.SGD(net.parameters(), lr=.5)
 
-    fmnist.train(net, train_iter, test_iter, loss, eps, batch_size, None, None, optimizer)
+    base.train(net, train_iter, test_iter, loss, eps, batch_size, optimizer=optimizer)
 
 
 def main():
     batch_size = 256
 
-    num_inputs = 784
-    num_outputs = 10
-    num_hiddens = [256, 256]
+    num_inputs, num_outputs, num_hiddens = 784, 10, [256, 256]
     drop_prob = [.2, .5]
 
     eps = 1e-3
@@ -75,9 +85,9 @@ def main():
 
     mode = eval(input('0[Scratch Version], 1[Custom Version]: '))
     if mode:
-        custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size)
+        custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size, drop_prob)
     else:
-        scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size)
+        scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size, drop_prob)
 
 
 if __name__ == '__main__':
