@@ -1,42 +1,4 @@
-import random
 import torch
-from IPython import display
-from matplotlib import pyplot as plt
-
-
-def svg_display():
-    # use scalable vector graphics to display the figures
-    display.set_matplotlib_formats('svg')
-
-
-def set_size(figsize=(3.5, 2.5)):
-    svg_display()
-    # set the size of the figure
-    plt.rcParams['figure.figsize'] = figsize
-
-
-def semilogy(x_vals, y_vals, x_label, y_label, x2_vals=None, y2_vals=None, legend=None, figsize=(3.5, 2.5)):
-    set_size(figsize)
-
-    plt.semilogy(x_vals, y_vals)
-    if x2_vals and y2_vals:
-        plt.semilogy(x2_vals, y2_vals, linestyle=':')
-        plt.legend(legend)
-
-    plt.xlabel(x_label)
-    plt.ylabel(y_label)
-    plt.show()
-
-
-'''''
-def data_iter(batch_size, features, labels):
-    num_examples = len(features)
-    indices = list(range(num_examples))
-    random.shuffle(indices)  # readout sequence is random
-    for i in range(0, num_examples, batch_size):
-        j = torch.LongTensor(indices[i: min(i + batch_size, num_examples)])
-        yield features.index_select(0, j), labels.index_select(0, j)
-'''
 
 
 # initialize parameters
@@ -57,18 +19,18 @@ def linear_regression(X, w, b):
     return torch.mm(X, w) + b
 
 
-## softmax regression
-def softmax(X):
-    X_exp = X.exp()
-    partition = X_exp.sum(dim=1, keepdim=True)
-    return X_exp / partition
+class SoftmaxNet():
+    def __init__(self, params):
+        self.params = params  # params = [W, b]
 
+    def softmax(self, X):
+        X_exp = X.exp()
+        partition = X_exp.sum(dim=1, keepdim=True)
+        return X_exp / partition
 
-def softmax_regression(X, net=None, params=None):  # params = [W, b]
-    if params is None:
-        return softmax(net(X))
-    num_inputs = X.shape[-1] * X.shape[-2]
-    return softmax(torch.mm(X.view(-1, num_inputs), params[0]) + params[1])
+    def net(self, X):
+        num_inputs = X.shape[-1] * X.shape[-2]
+        return self.softmax(torch.mm(X.view(-1, num_inputs), self.params[0]) + self.params[1])
 
 
 ## inverted dropout
@@ -130,21 +92,3 @@ def sgd(params, lr, batch_size):
     # mini-batch stochastic gradient descent
     for param in params:
         param.data -= lr * param.grad / batch_size
-
-
-# evaluate
-def accuracy(data_iter, net, params=None):
-    acc_sum, n = .0, 0
-    for X, y in data_iter:
-        if isinstance(net, torch.nn.Module):
-            net.eval()
-            acc_sum += (net(X).argmax(dim=1) == y).float().sum().item()
-            net.train()
-        else:
-            if ('is_training' in net.__code__.co_varnames):
-                acc_sum += (net(X, params=params).argmax(dim=1) == y).float().sum().item()
-            else:
-                acc_sum += (net(X, params=params).argmax(dim=1) == y).float().sum().item()
-
-        n += y.shape[0]
-    return acc_sum / n

@@ -10,8 +10,11 @@
       <w>nrows</w>
       <w>overfitting</w>
       <w>perceptron</w>
+      <w>pred</w>
       <w>relu</w>
+      <w>semilogy</w>
       <w>softmax</w>
+      <w>vals</w>
     </words>
   </dictionary>
 </component>

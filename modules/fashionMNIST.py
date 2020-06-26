@@ -4,7 +4,7 @@ import torchvision
 import numpy as np
 import math
 from matplotlib import pyplot as plt
-from modules import d2lScratch as scratch
+from modules import base
 
 
 def get_labels(labels):
@@ -15,7 +15,7 @@ def get_labels(labels):
 
 def show(images, labels):
     # show at most 25 images
-    scratch.svg_display()
+    base.svg_display()
 
     ncols = 5
     # print(len(images))
@@ -51,48 +51,6 @@ def load_data(batch_size, resize=None, root='../'):
     return train_iter, test_iter
 
 
-def train(net, train_iter, test_iter, loss, eps, batch_size, params=None, lr=None, optimizer=None):
-    train_acc_rate = 0
-    epoch = 0
-
-    while True:
-        train_loss_sum, train_acc_sum, n = .0, .0, 0
-
-        for X, y in train_iter:
-            if params is None:
-                y_hat = net(X)
-            else:
-                y_hat = net(X, params=params)
-            ls = loss(y_hat, y).sum()
-
-            # reset gradient
-            if optimizer is not None:
-                optimizer.zero_grad()
-            elif params is not None and params[0].grad is not None:
-                for param in params:
-                    param.grad.data.zero_()
-
-            ls.backward()
-            if optimizer is None:
-                scratch.sgd(params, lr, batch_size)
-            else:
-                optimizer.step()
-
-            train_loss_sum += ls.item()
-            train_acc_sum += (y_hat.argmax(dim=1) == y).sum().item()
-            n += y.shape[0]
-
-        test_acc = scratch.accuracy(test_iter, net, params)
-        print('epoch %d, loss %.4f, train acc %.3f, test acc %.3f'
-              % (epoch + 1, train_loss_sum / n, train_acc_sum / n, test_acc))
-
-        if abs(train_acc_sum / n - train_acc_rate) < eps:
-            break
-        else:
-            epoch += 1
-            train_acc_rate = train_acc_sum / n
-
-
 def test():
     batch_size = 20
 
@@ -110,7 +68,7 @@ def test():
     W.requires_grad_()
     b.requires_grad_()
     '''''
-    train(scratch.softmax_regression, train_iter, test_iter, scratch.cross_entropy, eps, batch_size,[W, b], lr)
+    base.train(scratch.softmax_regression, train_iter, test_iter, scratch.cross_entropy, eps, batch_size,[W, b], lr)
     '''''
     X, y = next(iter(test_iter))
 

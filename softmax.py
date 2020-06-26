@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+from modules import base
 from modules import fashionMNIST as fmnist
 
 from modules import d2lScratch as scratch
@@ -11,7 +12,7 @@ from modules import d2lCustom as custom
 
 
 def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 9, loss 0.4533, train acc 0.846, test acc 0.833
+    # epoch 10, loss 0.4479, train acc 0.848, test acc 0.832
     # if eps=1e-3, learning rate = 0.1
 
     lr = 0.1
@@ -22,14 +23,16 @@ def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
     W.requires_grad_()
     b.requires_grad_()
 
-    fmnist.train(scratch.softmax_regression, train_iter, test_iter, scratch.cross_entropy, eps, batch_size,
-                 [W, b], lr)
+    softmax = scratch.SoftmaxNet([W, b])
 
-    return [W, b]
+    base.train(softmax.net, train_iter, test_iter, scratch.cross_entropy, eps, batch_size,
+               [W, b], lr)
+
+    return softmax.net
 
 
 def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 12, loss 0.0017, train acc 0.850, test acc 0.813
+    # epoch 9, loss 0.0018, train acc 0.846, test acc 0.825
     # if eps=1e-3, learning rate = 0.1
 
     net = nn.Sequential(
@@ -46,7 +49,7 @@ def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
 
     optimizer = torch.optim.SGD(net.parameters(), lr=.1)
 
-    fmnist.train(net, train_iter, test_iter, loss, eps, batch_size, None, None, optimizer)
+    base.train(net, train_iter, test_iter, loss, eps, batch_size, None, None, optimizer)
 
     return net
 
@@ -54,8 +57,7 @@ def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
 def main():
     batch_size = 256
 
-    num_inputs = 784
-    num_outputs = 10
+    num_inputs, num_outputs = 784, 10
 
     eps = 1e-3
     # eps = 1e-1
@@ -63,21 +65,15 @@ def main():
     root = './Datasets'
     train_iter, test_iter = fmnist.load_data(batch_size, root=root)
 
-    mode = eval(input('0[Scratch Version], 1[Custom Version]: '))
-    if mode:
-        cus_net = custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
-    else:
-        params = scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
-
-    # predict
     X, y = next(iter(test_iter))
-
     true_labels = fmnist.get_labels(y.numpy())
 
+    mode = eval(input('0[Scratch Version], 1[Custom Version]: '))
     if mode:
-        pred_labels = fmnist.get_labels(scratch.softmax_regression(X, cus_net).argmax(dim=1).numpy())
+        net = custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
     else:
-        pred_labels = fmnist.get_labels(scratch.softmax_regression(X, params=params).argmax(dim=1).numpy())
+        net = scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
+    pred_labels = fmnist.get_labels(net(X).argmax(dim=1).numpy())
 
     titles = []
     for true, pred in zip(true_labels, pred_labels):
