@@ -19,6 +19,7 @@ def linear_regression(X, w, b):
     return torch.mm(X, w) + b
 
 
+## softmax regression
 class SoftmaxNet():
     def __init__(self, params):
         self.params = params  # params = [W, b]
@@ -52,10 +53,14 @@ def inverted_dropout(X, params, drop_prob, is_training=True):  # params = [W1, b
 
 
 ## multilayer perceptron
-def mlp(X, params=None):  # params = [W1, b1, W2, b2]
-    num_inputs = X.shape[-1] * X.shape[-2]
-    H = relu(torch.mm(X.view(-1, num_inputs), params[0]) + params[1])
-    return torch.mm(H, params[2]) + params[3]
+class MLPNet():
+    def __init__(self, params):
+        self.params = params  # params = [W1, b1, W2, b2]
+
+    def net(self, X):
+        num_inputs = X.shape[-1] * X.shape[-2]
+        H = relu(torch.matmul(X.view(-1, num_inputs), self.params[0]) + self.params[1])
+        return torch.matmul(H, self.params[2]) + self.params[3]
 
 
 # loss

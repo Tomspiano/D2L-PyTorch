@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+from modules import base
 from modules import fashionMNIST as fmnist
 
 from modules import d2lScratch as scratch
@@ -10,7 +11,7 @@ from modules import d2lCustom as custom
 
 
 def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 10, loss 0.0012, train acc 0.885, test acc 0.849
+    # epoch 19, loss 0.0010, train acc 0.908, test acc 0.824
     # if eps=1e-3, learning rate = 128 (0.5)
 
     lr = 0.5 * batch_size
@@ -22,13 +23,15 @@ def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps
 
     params = [W1, b1, W2, b2]
 
+    mlp = scratch.MLPNet(params)
+
     loss = nn.CrossEntropyLoss()
 
-    fmnist.train(scratch.mlp, train_iter, test_iter, loss, eps, batch_size, params, lr)
+    base.train(mlp.net, train_iter, test_iter, loss, eps, batch_size, params, lr)
 
 
 def custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 16, loss 0.0010, train acc 0.900, test acc 0.875
+    # epoch 15, loss 0.0010, train acc 0.901, test acc 0.855
     # if eps=1e-3, learning rate = 0.5
 
     net = nn.Sequential(
@@ -45,15 +48,13 @@ def custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps,
 
     optimizer = torch.optim.SGD(net.parameters(), lr=.5)
 
-    fmnist.train(net, train_iter, test_iter, loss, eps, batch_size, None, None, optimizer)
+    base.train(net, train_iter, test_iter, loss, eps, batch_size, None, None, optimizer)
 
 
 def main():
     batch_size = 256
 
-    num_inputs = 784
-    num_outputs = 10
-    num_hiddens = 256
+    num_inputs, num_outputs, num_hiddens = 784, 10, 256
 
     eps = 1e-3
     # eps = 1e-1
