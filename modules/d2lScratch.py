@@ -1,13 +1,6 @@
 import torch
 
 
-# initialize parameters
-def init_params(num_inputs):
-    w = torch.randn((num_inputs, 1), requires_grad=True)
-    b = torch.zeros(1, requires_grad=True)
-    return [w, b]
-
-
 # activation function
 def relu(X):
     return torch.max(X, torch.zeros(X.shape, dtype=torch.float))
@@ -86,6 +79,11 @@ class DropoutNet:
         return torch.matmul(H[-1], self.params[-2]) + self.params[-1]
 
 
+## weight decay
+def l2_penalty(w):
+    return (w**2).sum() / 2
+
+
 # loss
 def squared_loss(y_hat, y):
     return (y_hat - y.view(y_hat.size()))**2 / 2
@@ -93,13 +91,6 @@ def squared_loss(y_hat, y):
 
 def cross_entropy(y_hat, y):
     return - torch.log(y_hat.gather(1, y.view(-1, 1)))
-
-
-# overfitting
-## penalty
-def l2_penalty(w):
-    return (w**2).sum() / 2
-
 
 
 # optimize

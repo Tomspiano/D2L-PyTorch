@@ -8,8 +8,42 @@ from modules import d2lScratch as scratch
 
 # overfitting
 
-def weight_decay_fit(num_inputs, train_iter, train_features, test_features, train_labels, test_labels, loss, num_epochs,
-                     lr, wd):
+def scratch_ver(num_inputs, train_iter, train_features, test_features, train_labels, test_labels, loss, num_epochs,
+                lr, wd):
+    # L2 norm of w:  0.017779173329472542
+    # if num_epochs = 100, learning rate = 0.003, weight decay = 15
+    w = torch.randn((num_inputs, 1), requires_grad=True)
+    b = torch.zeros(1, requires_grad=True)
+
+    linear = scratch.LinearNet([w, b])
+    net = linear.net
+
+    train_ls, test_ls = [], []
+    for _ in range(num_epochs):
+        for X, y in train_iter:
+            ls = loss(net(X), y) + wd * scratch.l2_penalty(w)
+            ls.sum()
+            if w.grad is not None:
+                w.grad.data.zero_()
+                b.grad.data.zero_()
+
+            ls.backward()
+
+            scratch.sgd([w, b], lr, 1)
+
+        train_ls.append(loss(net(train_features), train_labels).mean().item())
+        test_ls.append(loss(net(test_features), test_labels).mean().item())
+
+    print('L2 norm of w: ', w.norm().item())
+    base.semilogy(range(1, num_epochs + 1), train_ls, 'epochs', 'loss',
+                  range(1, num_epochs + 1), test_ls, ['train', 'test'],
+                  figsize=(10, 8))
+
+
+def custom_ver(num_inputs, train_iter, train_features, test_features, train_labels, test_labels, loss, num_epochs,
+               lr, wd):
+    # L2 norm of w:  0.017779173329472542
+    # if num_epochs = 100, learning rate = 0.003, weight decay = 15
     net = nn.Linear(num_inputs, 1)
 
     nn.init.normal_(net.weight)
@@ -54,9 +88,13 @@ def main():
     dataset = Data.TensorDataset(train_features, train_labels)
     train_iter = Data.DataLoader(dataset, batch_size, shuffle=True)
 
-    weight_decay_fit(num_inputs, train_iter, train_features, test_features, train_labels, test_labels,
-                     scratch.squared_loss, num_epochs, lr, wd)
-    # L2 norm of w:  0.019665690138936043
+    mode = eval(input('0[Scratch Version], 1[Custom Version]: '))
+    if mode:
+        custom_ver(num_inputs, train_iter, train_features, test_features, train_labels, test_labels,
+                   scratch.squared_loss, num_epochs, lr, wd)
+    else:
+        scratch_ver(num_inputs, train_iter, train_features, test_features, train_labels, test_labels,
+                    scratch.squared_loss, num_epochs, lr, wd)
 
 
 if __name__ == '__main__':

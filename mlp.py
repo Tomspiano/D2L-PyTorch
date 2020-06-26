@@ -12,7 +12,7 @@ from modules import d2lCustom as custom
 
 def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size):
     # epoch 19, loss 0.0010, train acc 0.908, test acc 0.824
-    # if eps=1e-3, learning rate = 128 (0.5)
+    # if eps = 1e-3, learning rate = 128 (0.5)
 
     lr = 0.5 * batch_size
 
@@ -32,7 +32,7 @@ def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps
 
 def custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size):
     # epoch 15, loss 0.0010, train acc 0.901, test acc 0.855
-    # if eps=1e-3, learning rate = 0.5
+    # if eps = 1e-3, learning rate = 0.5
 
     net = nn.Sequential(
             custom.FlattenLayer(),

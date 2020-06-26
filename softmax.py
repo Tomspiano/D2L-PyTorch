@@ -13,7 +13,7 @@ from modules import d2lCustom as custom
 
 def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
     # epoch 10, loss 0.4479, train acc 0.848, test acc 0.832
-    # if eps=1e-3, learning rate = 0.1
+    # if eps = 1e-3, learning rate = 0.1
 
     lr = 0.1
 
@@ -33,7 +33,7 @@ def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
 
 def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
     # epoch 9, loss 0.0018, train acc 0.846, test acc 0.825
-    # if eps=1e-3, learning rate = 0.1
+    # if eps = 1e-3, learning rate = 0.1
 
     net = nn.Sequential(
             OrderedDict([
