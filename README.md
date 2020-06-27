@@ -11,6 +11,7 @@ This repository contains my learning notes for *Dive into Deep Learning*. The co
   - [Weight Decay](https://github.com/Tomspiano/D2L-PyTorch/blob/master/weight_decay.py)
   - [Dropout](https://github.com/Tomspiano/D2L-PyTorch/blob/master/dropout.py)
 - **6. Convolutional Neural Networks**
+  - [Convolutional Neural Networks (LeNet)](https://github.com/Tomspiano/D2L-PyTorch/blob/master/conv_nn.py)
 - **Kaggle**
   - [Predicting House Prices](https://github.com/Tomspiano/D2L-PyTorch/blob/master/Kaggle/house_prices.py)
 
