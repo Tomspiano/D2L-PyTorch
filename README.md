@@ -13,7 +13,7 @@ This repository contains my learning notes for *Dive into Deep Learning*. The co
 - **6. Convolutional Neural Networks**
   - [Convolutional Neural Networks (LeNet)](https://github.com/Tomspiano/D2L-PyTorch/blob/master/conv_nn.py)
 - **Kaggle**
-  - [Predicting House Prices](https://github.com/Tomspiano/D2L-PyTorch/blob/master/Kaggle/house_prices.py)
+  - [Predicting House Prices](https://github.com/Tomspiano/D2L-PyTorch/blob/master/Kaggle/HousePrices/house_prices.py)
 
 ## Reference
 
