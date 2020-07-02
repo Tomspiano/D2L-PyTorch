@@ -15,38 +15,35 @@ from modules import d2lCustom as custom
 ## inverted_dropout
 
 def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size, drop_prob):
-    # epoch 16, loss 0.0012, train acc 0.885, test acc 0.860
-    # if eps = 1e-3, learning rate = 128 (0.5)
-
-    lr = 0.5 * batch_size
-
+    # epoch 18, loss 0.0012, train acc 0.890, test acc 0.853, time 21.8 sec
+    # if eps = 1e-3, learning rate = 0.5
     params = []
     pre_nrows = num_inputs
     cnt = len(num_hiddens) + 1
     for i in range(cnt):
         if i == cnt - 1:
-            Wt = torch.tensor(np.random.normal(0, .01, (pre_nrows, num_outputs)), dtype=torch.float, requires_grad=True)
-            bt = torch.zeros(num_outputs, dtype=torch.float, requires_grad=True)
+            Wt = nn.Parameter(torch.normal(0, .01, (pre_nrows, num_outputs)), requires_grad=True)
+            bt = nn.Parameter(torch.zeros(num_outputs, requires_grad=True))
         else:
-            Wt = torch.tensor(np.random.normal(0, .01, (pre_nrows, num_hiddens[i])), dtype=torch.float,
-                              requires_grad=True)
-            bt = torch.zeros(num_hiddens[i], dtype=torch.float, requires_grad=True)
+            Wt = nn.Parameter(torch.normal(0, .01, (pre_nrows, num_hiddens[i])), requires_grad=True)
+            bt = nn.Parameter(torch.zeros(num_hiddens[i], requires_grad=True))
 
         params += [Wt, bt]
         if i != cnt - 1:
             pre_nrows = num_hiddens[i]
 
-    dropout = scratch.DropoutNet(params, drop_prob)
+    net = scratch.DropoutNet(params, drop_prob).net
 
     loss = nn.CrossEntropyLoss()
 
-    base.train(dropout.net, train_iter, test_iter, loss, eps, batch_size, params, lr)
+    optimizer = torch.optim.SGD(params, lr=.5)
+
+    base.train(net, train_iter, test_iter, loss, eps, batch_size, optimizer=optimizer)
 
 
 def custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size, drop_prob):
-    # epoch 13, loss 0.0013, train acc 0.880, test acc 0.872
+    # epoch 17, loss 0.0012, train acc 0.884, test acc 0.859, time 22.9 sec
     # if eps = 1e-3, learning rate = 0.5
-
     cnt = len(num_hiddens) + 1
     odict = OrderedDict()
     odict['flatten'] = custom.FlattenLayer()
@@ -80,7 +77,7 @@ def main():
     eps = 1e-3
     # eps = 1e-1
 
-    root = './Datasets'
+    root = '../../Datasets'
     train_iter, test_iter = fmnist.load_data(batch_size, root=root)
 
     mode = eval(input('0[Scratch Version], 1[Custom Version]: '))
