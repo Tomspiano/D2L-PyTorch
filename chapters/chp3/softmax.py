@@ -1,5 +1,4 @@
 import torch
-import numpy as np
 from modules import base
 from modules import fashionMNIST as fmnist
 
@@ -12,16 +11,13 @@ from modules import d2lCustom as custom
 
 
 def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 11, loss 0.4433, train acc 0.849, test acc 0.833, time 17.0 sec
+    # epoch 10, loss 0.4477, train acc 0.848, test acc 0.835, time 21.8 sec
     # if eps = 1e-3, learning rate = 0.1
 
     lr = 0.1
 
-    W = torch.tensor(np.random.normal(0, .01, (num_inputs, num_outputs)), dtype=torch.float)
-    b = torch.zeros(num_outputs, dtype=torch.float)
-
-    W.requires_grad_()
-    b.requires_grad_()
+    W = torch.normal(0, .01, (num_inputs, num_outputs), requires_grad=True)
+    b = torch.zeros(num_outputs, requires_grad=True)
 
     softmax = scratch.SoftmaxNet([W, b])
 
@@ -32,7 +28,7 @@ def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
 
 
 def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 11, loss 0.0017, train acc 0.849, test acc 0.827, time 21.1 sec
+    # epoch 11, loss 0.0017, train acc 0.849, test acc 0.834, time 20.8 sec
     # if eps = 1e-3, learning rate = 0.1
 
     net = nn.Sequential(
@@ -82,7 +78,7 @@ def main():
             title += 'X: ' + pred
         titles.append(title)
 
-    fmnist.show(X, titles)
+    fmnist.show(X, nrows=5, ncols=10, titles=titles)
 
 
 if __name__ == '__main__':
