@@ -1,5 +1,4 @@
 import torch
-import numpy as np
 from modules import base
 from modules import fashionMNIST as fmnist
 
@@ -11,15 +10,15 @@ from modules import d2lCustom as custom
 
 
 def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 19, loss 0.0010, train acc 0.908, test acc 0.824
-    # if eps = 1e-3, learning rate = 128 (0.5)
+    # epoch 14, loss 0.0011, train acc 0.897, test acc 0.856, time 20.7 sec
+    # if eps = 1e-3, learning rate = 0.5
 
-    lr = 0.5 * batch_size
+    lr = 0.5
 
-    W1 = torch.tensor(np.random.normal(0, .01, (num_inputs, num_hiddens)), dtype=torch.float, requires_grad=True)
-    b1 = torch.zeros(num_hiddens, dtype=torch.float, requires_grad=True)
-    W2 = torch.tensor(np.random.normal(0, .01, (num_hiddens, num_outputs)), dtype=torch.float, requires_grad=True)
-    b2 = torch.zeros(num_outputs, dtype=torch.float, requires_grad=True)
+    W1 = nn.Parameter(torch.randn(num_inputs, num_hiddens, requires_grad=True) * 0.01)
+    b1 = nn.Parameter(torch.zeros(num_hiddens, requires_grad=True))
+    W2 = nn.Parameter(torch.randn(num_hiddens, num_outputs, requires_grad=True) * 0.01)
+    b2 = nn.Parameter(torch.zeros(num_outputs, requires_grad=True))
 
     params = [W1, b1, W2, b2]
 
@@ -27,11 +26,13 @@ def scratch_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps
 
     loss = nn.CrossEntropyLoss()
 
-    base.train(mlp.net, train_iter, test_iter, loss, eps, batch_size, params, lr)
+    optimizer = torch.optim.SGD(params, lr)
+
+    base.train(mlp.net, train_iter, test_iter, loss, eps, batch_size, optimizer=optimizer)
 
 
 def custom_ver(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 15, loss 0.0010, train acc 0.901, test acc 0.855
+    # epoch 16, loss 0.0010, train acc 0.900, test acc 0.863, time 22.5 sec
     # if eps = 1e-3, learning rate = 0.5
 
     net = nn.Sequential(
@@ -59,7 +60,7 @@ def main():
     eps = 1e-3
     # eps = 1e-1
 
-    root = './Datasets'
+    root = '../../Datasets'
     train_iter, test_iter = fmnist.load_data(batch_size, root=root)
 
     mode = eval(input('0[Scratch Version], 1[Custom Version]: '))
