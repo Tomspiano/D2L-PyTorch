@@ -1,5 +1,4 @@
 import torch
-import numpy as np
 from modules import base
 from modules import fashionMNIST as fmnist
 
