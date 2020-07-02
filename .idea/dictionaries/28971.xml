@@ -1,24 +1,12 @@
 <component name="ProjectDictionaryState">
   <dictionary name="28971">
     <words>
-      <w>conv</w>
-      <w>convolutional</w>
-      <w>dataset</w>
+      <w>ckpt</w>
+      <w>cumsum</w>
+      <w>datasets</w>
       <w>figsize</w>
       <w>fmnist</w>
-      <w>hiddens</w>
-      <w>lambd</w>
-      <w>mnist</w>
-      <w>ncols</w>
-      <w>nrows</w>
-      <w>overfitting</w>
-      <w>perceptron</w>
       <w>pred</w>
-      <w>preds</w>
-      <w>preprocessing</w>
-      <w>relu</w>
-      <w>rmse</w>
-      <w>semilogy</w>
       <w>softmax</w>
       <w>vals</w>
     </words>

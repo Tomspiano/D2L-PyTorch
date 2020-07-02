@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fd1f4b86-c5ad-4e69-a14a-325ae4dabd4b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GoogLeNet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kaggle/HousePrices/house_prices_2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kaggle/HousePrices/submission_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NiN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Notes/Notes.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/batch_norm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoint/GoogLeNet.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoint/NiN.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoint/deep_conv_nn.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoint/vgg.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deep_conv_nn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dense_n.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/residual_n.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vgg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/28971.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/28971.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kaggle/HousePrices/house_prices.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kaggle/HousePrices/house_prices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/d2lCustom.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/d2lCustom.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/softmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/chapters/chp3/softmax.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Tomspiano &lt;helloworldbrandnew@163.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1e6mOOj47I44q5FqsZsgr4QYoE6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\backup\Program\MachineLearning\D2L-PyTorch\checkpoint" />
+      <recent name="D:\backup\Program\MachineLearning\D2L-PyTorch\chapters\chp3" />
+      <recent name="D:\backup\Program\MachineLearning\D2L-PyTorch\chapter" />
+      <recent name="D:\backup\Program\MachineLearning\D2L-PyTorch" />
+      <recent name="D:\backup\Program\MachineLearning\D2L-PyTorch\chp3\chapter" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="softmax" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="D2L-PyTorch" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/chapters/chp3" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chapters/chp3/softmax.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.softmax" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fd1f4b86-c5ad-4e69-a14a-325ae4dabd4b" name="Default Changelist" comment="" />
+      <created>1593650384017</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1593650384017</updated>
+    </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1593652440332</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1593652440332</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="285" y="130" key="CommitChangelistDialog2" timestamp="1593652423989">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="285" y="130" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1593652423989" />
+    <state width="908" height="262" key="GridCell.Tab.0.bottom" timestamp="1593652818910">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="908" height="262" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1593652818910" />
+    <state width="908" height="262" key="GridCell.Tab.0.center" timestamp="1593652818910">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="908" height="262" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1593652818910" />
+    <state width="908" height="262" key="GridCell.Tab.0.left" timestamp="1593652818910">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="908" height="262" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1593652818910" />
+    <state width="908" height="262" key="GridCell.Tab.0.right" timestamp="1593652818910">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="908" height="262" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1593652818910" />
+    <state width="908" height="262" key="GridCell.Tab.1.bottom" timestamp="1593652818910">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="908" height="262" key="GridCell.Tab.1.bottom/0.0.1536.834@0.0.1536.834" timestamp="1593652818910" />
+    <state width="908" height="262" key="GridCell.Tab.1.center" timestamp="1593652818910">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="908" height="262" key="GridCell.Tab.1.center/0.0.1536.834@0.0.1536.834" timestamp="1593652818910" />
+    <state width="908" height="262" key="GridCell.Tab.1.left" timestamp="1593652818910">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="908" height="262" key="GridCell.Tab.1.left/0.0.1536.834@0.0.1536.834" timestamp="1593652818910" />
+    <state width="908" height="262" key="GridCell.Tab.1.right" timestamp="1593652818910">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="908" height="262" key="GridCell.Tab.1.right/0.0.1536.834@0.0.1536.834" timestamp="1593652818910" />
+    <state x="540" y="62" key="SettingsEditor" timestamp="1593652609729">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="540" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1593652609729" />
+    <state x="618" y="202" key="Vcs.Push.Dialog.v2" timestamp="1593652731767">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="618" y="202" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1593652731767" />
+    <state x="0" y="100" width="695" height="523" key="dock-window-1" timestamp="1593652290388">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="0" y="100" width="695" height="523" key="dock-window-1/0.0.1536.834@0.0.1536.834" timestamp="1593652290388" />
+  </component>
+</project>
