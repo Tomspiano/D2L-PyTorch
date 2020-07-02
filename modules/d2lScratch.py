@@ -3,7 +3,7 @@ import torch
 
 # activation function
 def relu(X):
-    return torch.max(X, torch.zeros(X.shape, dtype=torch.float))
+    return torch.max(X, torch.zeros_like(X))
 
 
 # net
@@ -13,7 +13,7 @@ class LinearNet:
         self.params = params  # params = [w, b]
 
     def net(self, X):
-        return torch.mm(X, self.params[0]) + self.params[1]
+        return torch.matmul(X, self.params[0]) + self.params[1]
 
 
 ## softmax regression
@@ -23,13 +23,13 @@ class SoftmaxNet:
 
     @staticmethod
     def softmax(X):
-        X_exp = X.exp()
-        partition = X_exp.sum(dim=1, keepdim=True)
+        X_exp = torch.exp(X)
+        partition = torch.sum(X_exp, dim=1, keepdim=True)
         return X_exp / partition
 
     def net(self, X):
         num_inputs = X.shape[-1] * X.shape[-2]
-        return self.softmax(torch.mm(X.view(-1, num_inputs), self.params[0]) + self.params[1])
+        return self.softmax(torch.matmul(X.reshape((-1, num_inputs)), self.params[0]) + self.params[1])
 
 
 ## multilayer perceptron
@@ -39,8 +39,10 @@ class MLPNet:
 
     def net(self, X):
         num_inputs = X.shape[-1] * X.shape[-2]
-        H = relu(torch.matmul(X.view(-1, num_inputs), self.params[0]) + self.params[1])
-        return torch.matmul(H, self.params[2]) + self.params[3]
+        H = relu((X.reshape((-1, num_inputs)) @ self.params[0] + self.params[1]))
+        # Here '@' stands for dot product operation
+
+        return H @ self.params[2] + self.params[3]
 
 
 ## inverted dropout
@@ -53,11 +55,11 @@ class DropoutNet:
     def dropout(X, drop_prob):
         assert 0 <= drop_prob <= 1
 
-        X = X.float()
         keep_prob = 1 - drop_prob
-
         if keep_prob == 0:
             return torch.zeros_like(X)
+        if drop_prob == 0:
+            return X
 
         mask = (torch.rand(X.shape) < keep_prob).float()
         return mask * X / keep_prob
@@ -81,20 +83,21 @@ class DropoutNet:
 
 ## weight decay
 def l2_penalty(w):
-    return (w**2).sum() / 2
+    return torch.sum(w**2) / 2
 
 
 # loss
 def squared_loss(y_hat, y):
-    return (y_hat - y.view(y_hat.size()))**2 / 2
+    return (y_hat - y.reshape(y_hat.shape))**2 / 2
 
 
 def cross_entropy(y_hat, y):
-    return - torch.log(y_hat.gather(1, y.view(-1, 1)))
+    return - torch.log(y_hat[range(len(y_hat)), y])
 
 
 # optimize
 def sgd(params, lr, batch_size):
     # mini-batch stochastic gradient descent
     for param in params:
-        param.data -= lr * param.grad / batch_size
+        param.data.sub_(lr * param.grad / batch_size)
+        param.grad.data.zero_()

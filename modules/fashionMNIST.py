@@ -17,15 +17,18 @@ def show(images, nrows, ncols, titles=None, scale=1.5):
     axes = axes.flatten()
     for i, (ax, img) in enumerate(zip(axes, images)):
         if 'asnumpy' in dir(img):
-            img = img.asnumpy()
+            img = img.view(img.shape[1], img.shape[2]).asnumpy()
         if 'numpy' in dir(img):
-            img = img.numpy()
+            img = img.view(img.shape[1], img.shape[2]).numpy()
         ax.imshow(img)
         ax.axes.get_xaxis().set_visible(False)
         ax.axes.get_yaxis().set_visible(False)
         if titles:
             ax.set_title(titles[i])
-    return axes
+
+    plt.tight_layout()
+    plt.show()
+    # return axes
 
 
 def get_dataloader_workers(num_workers=4):
@@ -52,3 +55,19 @@ def load_data(batch_size, resize=None, root='./'):
     test_iter = Data.DataLoader(mnist_test, batch_size, shuffle=False, num_workers=num_workers)
 
     return train_iter, test_iter
+
+
+def test():
+    batch_size = 256
+
+    root = '../Datasets'
+    train_iter, test_iter = load_data(batch_size, root=root)
+
+    X, y = next(iter(test_iter))
+    true_labels = get_labels(y.numpy())
+
+    show(X, nrows=5, ncols=3, titles=true_labels)
+
+
+if __name__ == '__main__':
+    test()
