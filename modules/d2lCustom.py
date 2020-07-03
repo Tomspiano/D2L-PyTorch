@@ -63,15 +63,13 @@ class AlexNet(nn.Module):
         super().__init__()
         self.conv = nn.Sequential(
                 # capture the object
-                nn.Conv2d(1, 96, kernel_size=11, stride=4, padding=1),
-                nn.ReLU(),
+                nn.Conv2d(1, 96, kernel_size=11, stride=4, padding=1), nn.ReLU(),
                 nn.MaxPool2d(3, 2),
 
                 # Make the convolution window smaller, set padding to 2 for consistent
                 # height and width across the input and output, and increase the
                 # number of output channels
-                nn.Conv2d(96, 256, kernel_size=5, padding=2),
-                nn.ReLU(),
+                nn.Conv2d(96, 256, kernel_size=5, padding=2), nn.ReLU(),
                 nn.MaxPool2d(3, 2),
 
                 # Use three successive convolutional layers and a smaller convolution
@@ -79,12 +77,9 @@ class AlexNet(nn.Module):
                 # output channels is further increased. Pooling layers are not used to
                 # reduce the height and width of input after the first two
                 # convolutional layers
-                nn.Conv2d(256, 384, kernel_size=3, padding=1),
-                nn.ReLU(),
-                nn.Conv2d(384, 384, kernel_size=3, padding=1),
-                nn.ReLU(),
-                nn.Conv2d(384, 256, kernel_size=3, padding=1),
-                nn.ReLU(),
+                nn.Conv2d(256, 384, kernel_size=3, padding=1), nn.ReLU(),
+                nn.Conv2d(384, 384, kernel_size=3, padding=1), nn.ReLU(),
+                nn.Conv2d(384, 256, kernel_size=3, padding=1), nn.ReLU(),
                 nn.MaxPool2d(3, 2)
         )
 
@@ -93,11 +88,9 @@ class AlexNet(nn.Module):
         # Use the dropout layer to mitigate overfitting
         self.fc = nn.Sequential(
                 nn.Dropout(0.5),
-                nn.Linear(256 * 5 * 5, 4096),
-                nn.ReLU(),
+                nn.Linear(256 * 5 * 5, 4096), nn.ReLU(),
                 nn.Dropout(0.5),
-                nn.Linear(4096, 4096),
-                nn.ReLU(),
+                nn.Linear(4096, 4096), nn.ReLU(),
                 # the number of classes in Fashion-MNIST is 10
                 nn.Linear(4096, 10),
         )
@@ -106,6 +99,41 @@ class AlexNet(nn.Module):
         feature = self.conv(img)
         output = self.fc(feature.view(img.shape[0], -1))
         return output
+
+
+class VGG11(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+        self.conv_arch = ((1, 64), (1, 128), (2, 256), (2, 512), (2, 512))
+
+        # The convulational layer part
+        conv_blks = []
+        in_channels = 1
+        for (num_convs, out_channels) in self.conv_arch:
+            conv_blks.append(self.vgg_block(num_convs, in_channels, out_channels))
+            in_channels = out_channels
+        # The fully connected layer part
+        self.net = nn.Sequential(
+                *conv_blks, FlattenLayer(),
+                nn.Linear(in_channels * 7 * 7, 4096), nn.ReLU(), nn.Dropout(0.5),
+                nn.Linear(4096, 4096), nn.ReLU(), nn.Dropout(0.5),
+                nn.Linear(4096, 10)
+        )
+
+    @staticmethod
+    def vgg_block(num_convs, in_channels, out_channels):
+        layers = []
+        for _ in range(num_convs):
+            layers.append(nn.Conv2d(in_channels, out_channels,
+                                    kernel_size=3, padding=1))
+            layers.append(nn.ReLU())
+            in_channels = out_channels
+        layers.append(nn.MaxPool2d(kernel_size=2, stride=2))
+        return nn.Sequential(*layers)
+
+    def forward(self, x):
+        return self.net(x)
 
 
 def arch(x, layers):
@@ -117,7 +145,7 @@ def arch(x, layers):
 
 if __name__ == '__main__':
     size = (1, 1, 224, 224)
-    nets = [AlexNet().conv, AlexNet().fc]
+    nets = [VGG11().net]
     X = torch.randn(size, dtype=torch.float32)
     for net in nets:
         X = arch(X, net)
