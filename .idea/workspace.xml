@@ -4,7 +4,6 @@
     <list default="true" id="fd1f4b86-c5ad-4e69-a14a-325ae4dabd4b" name="Default Changelist" comment="update">
       <change afterPath="$PROJECT_DIR$/Kaggle/HousePrices/house_prices_2.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Kaggle/HousePrices/submission_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Notes/Notes.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/chapters/chp7/GoogLeNet.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/chapters/chp7/NiN.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/chapters/chp7/batch_norm.py" afterDir="false" />
@@ -12,22 +11,12 @@
       <change afterPath="$PROJECT_DIR$/chapters/chp7/dense_n.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/chapters/chp7/residual_n.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/chapters/chp7/vgg.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoint/GoogLeNet.pt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoint/NiN.pt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoint/deep_conv_nn.pt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoint/vgg.pt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/28971.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/28971.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kaggle/HousePrices/house_prices.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kaggle/HousePrices/house_prices.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conv_nn.py" beforeDir="false" afterPath="$PROJECT_DIR$/chapters/chp6/conv_nn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/base.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/d2lCustom.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/d2lCustom.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/d2lScratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/d2lScratch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/fashionMNIST.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/fashionMNIST.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weight_decay.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weight_decay_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/weight_decay_1.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,8 +59,8 @@
       <recent name="D:\backup\Program\MachineLearning\D2L-PyTorch\chapters\chp3" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.dropout">
-    <configuration name="dropout" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.d2lCustom">
+    <configuration name="conv_nn" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="D2L-PyTorch" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -79,11 +68,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/chapters/chp4" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/chapters/chp6" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chapters/chp4/dropout.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chapters/chp6/conv_nn.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -92,7 +81,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="fashionMNIST" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="d2lCustom" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="D2L-PyTorch" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -104,7 +93,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/fashionMNIST.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/d2lCustom.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="deep_conv_nn" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="D2L-PyTorch" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/chapters/chp7" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chapters/chp7/deep_conv_nn.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -126,27 +136,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chapters/chp4/mlp.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="softmax" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="D2L-PyTorch" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/chapters/chp3" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/chapters/chp3/softmax.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -178,11 +167,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.dropout" />
+        <item itemvalue="Python.d2lCustom" />
+        <item itemvalue="Python.deep_conv_nn" />
+        <item itemvalue="Python.conv_nn" />
         <item itemvalue="Python.weight_decay" />
         <item itemvalue="Python.mlp" />
-        <item itemvalue="Python.softmax" />
-        <item itemvalue="Python.fashionMNIST" />
       </list>
     </recent_temporary>
   </component>
@@ -274,73 +263,101 @@
       <option name="project" value="LOCAL" />
       <updated>1593683597583</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="update">
+      <created>1593683931799</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1593683931799</updated>
+    </task>
+    <task id="LOCAL-00013" summary="update">
+      <created>1593788130153</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1593788130153</updated>
+    </task>
+    <task id="LOCAL-00014" summary="update">
+      <created>1593789607505</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1593789607505</updated>
+    </task>
+    <task id="LOCAL-00015" summary="section 6">
+      <created>1593790781252</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1593790781252</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="section 4-6" />
-    <MESSAGE value="update" />
     <MESSAGE value="section 4-7" />
     <MESSAGE value="section 1-3" />
     <MESSAGE value="section 5" />
+    <MESSAGE value="update" />
     <MESSAGE value="section 6" />
     <option name="LAST_COMMIT_MESSAGE" value="section 6" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-27" y="121" key="CommitChangelistDialog2" timestamp="1593683855171">
+    <state x="594" y="82" key="CommitChangelistDialog2" timestamp="1593790766341">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="-27" y="121" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1593683855171" />
+    <state x="594" y="82" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1593790766341" />
     <state x="138" y="116" key="DiffContextDialog" timestamp="1593683275712">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="138" y="116" key="DiffContextDialog/0.0.1536.834@0.0.1536.834" timestamp="1593683275712" />
-    <state width="908" height="262" key="GridCell.Tab.0.bottom" timestamp="1593682602291">
+    <state width="908" height="262" key="GridCell.Tab.0.bottom" timestamp="1593791662551">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="908" height="262" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1593682602291" />
-    <state width="908" height="262" key="GridCell.Tab.0.center" timestamp="1593682602291">
+    <state width="908" height="262" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1593791662551" />
+    <state width="908" height="262" key="GridCell.Tab.0.center" timestamp="1593791662543">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="908" height="262" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1593682602291" />
-    <state width="908" height="262" key="GridCell.Tab.0.left" timestamp="1593682602291">
+    <state width="908" height="262" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1593791662543" />
+    <state width="908" height="262" key="GridCell.Tab.0.left" timestamp="1593791662543">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="908" height="262" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1593682602291" />
-    <state width="908" height="262" key="GridCell.Tab.0.right" timestamp="1593682602291">
+    <state width="908" height="262" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1593791662543" />
+    <state width="908" height="262" key="GridCell.Tab.0.right" timestamp="1593791662551">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="908" height="262" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1593682602291" />
-    <state width="908" height="262" key="GridCell.Tab.1.bottom" timestamp="1593682602225">
+    <state width="908" height="262" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1593791662551" />
+    <state width="908" height="262" key="GridCell.Tab.1.bottom" timestamp="1593791662380">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="908" height="262" key="GridCell.Tab.1.bottom/0.0.1536.834@0.0.1536.834" timestamp="1593682602225" />
-    <state width="908" height="262" key="GridCell.Tab.1.center" timestamp="1593682602225">
+    <state width="908" height="262" key="GridCell.Tab.1.bottom/0.0.1536.834@0.0.1536.834" timestamp="1593791662380" />
+    <state width="908" height="262" key="GridCell.Tab.1.center" timestamp="1593791662380">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="908" height="262" key="GridCell.Tab.1.center/0.0.1536.834@0.0.1536.834" timestamp="1593682602225" />
-    <state width="908" height="262" key="GridCell.Tab.1.left" timestamp="1593682602225">
+    <state width="908" height="262" key="GridCell.Tab.1.center/0.0.1536.834@0.0.1536.834" timestamp="1593791662380" />
+    <state width="908" height="262" key="GridCell.Tab.1.left" timestamp="1593791662380">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="908" height="262" key="GridCell.Tab.1.left/0.0.1536.834@0.0.1536.834" timestamp="1593682602225" />
-    <state width="908" height="262" key="GridCell.Tab.1.right" timestamp="1593682602225">
+    <state width="908" height="262" key="GridCell.Tab.1.left/0.0.1536.834@0.0.1536.834" timestamp="1593791662380" />
+    <state width="908" height="262" key="GridCell.Tab.1.right" timestamp="1593791662380">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="908" height="262" key="GridCell.Tab.1.right/0.0.1536.834@0.0.1536.834" timestamp="1593682602225" />
-    <state x="491" y="69" key="SettingsEditor" timestamp="1593675560194">
+    <state width="908" height="262" key="GridCell.Tab.1.right/0.0.1536.834@0.0.1536.834" timestamp="1593791662380" />
+    <state x="333" y="72" key="SettingsEditor" timestamp="1593788345779">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="491" y="69" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1593675560194" />
-    <state x="362" y="77" key="Vcs.Push.Dialog.v2" timestamp="1593683600100">
+    <state x="333" y="72" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1593788345779" />
+    <state x="362" y="77" key="Vcs.Push.Dialog.v2" timestamp="1593790786172">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="362" y="77" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1593683600100" />
-    <state x="0" y="0" width="594" height="813" key="dock-window-1" timestamp="1593664559670">
+    <state x="362" y="77" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1593790786172" />
+    <state x="0" y="77" width="922" height="523" key="dock-window-1" timestamp="1593784455691">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="0" y="0" width="594" height="813" key="dock-window-1/0.0.1536.834@0.0.1536.834" timestamp="1593664559670" />
+    <state x="0" y="77" width="922" height="523" key="dock-window-1/0.0.1536.834@0.0.1536.834" timestamp="1593784455691" />
     <state x="100" y="6" width="922" height="813" key="dock-window-2" timestamp="1593666093094">
       <screen x="0" y="0" width="1536" height="834" />
     </state>

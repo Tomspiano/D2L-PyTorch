@@ -3,6 +3,9 @@
     <words>
       <w>asnumpy</w>
       <w>ckpt</w>
+      <w>conv</w>
+      <w>convolutional</w>
+      <w>cuda</w>
       <w>cumsum</w>
       <w>dataloader</w>
       <w>dataset</w>
