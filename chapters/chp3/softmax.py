@@ -1,34 +1,14 @@
 import torch
 from modules import base
 from modules import fashionMNIST as fmnist
-
-from modules import d2lScratch as scratch
-
 from torch import nn
 from torch.nn import init
 from collections import OrderedDict
 from modules import d2lCustom as custom
 
 
-def scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 10, loss 0.4477, train acc 0.848, test acc 0.835, time 21.8 sec
-    # if eps = 1e-3, learning rate = 0.1
-
-    lr = 0.1
-
-    W = torch.normal(0, .01, (num_inputs, num_outputs), requires_grad=True)
-    b = torch.zeros(num_outputs, requires_grad=True)
-
-    softmax = scratch.SoftmaxNet([W, b])
-
-    base.train(softmax.net, train_iter, test_iter, scratch.cross_entropy, eps, batch_size,
-               [W, b], lr)
-
-    return softmax.net
-
-
-def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
-    # epoch 11, loss 0.0017, train acc 0.849, test acc 0.834, time 20.8 sec
+def train(num_inputs, num_outputs, train_iter, test_iter, eps):
+    # epoch 11, loss 0.443, train acc 0.849, test acc 0.833, 9418.4 examples/sec
     # if eps = 1e-3, learning rate = 0.1
 
     net = nn.Sequential(
@@ -45,7 +25,7 @@ def custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size):
 
     optimizer = torch.optim.SGD(net.parameters(), lr=.1)
 
-    base.train(net, train_iter, test_iter, loss, eps, batch_size, optimizer=optimizer)
+    base.train(net, train_iter, test_iter, loss, eps=eps, optimizer=optimizer)
 
     return net
 
@@ -64,11 +44,7 @@ def main():
     X, y = next(iter(test_iter))
     true_labels = fmnist.get_labels(y.numpy())
 
-    mode = eval(input('0[Scratch Version], 1[Custom Version]: '))
-    if mode:
-        net = custom_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
-    else:
-        net = scratch_ver(num_inputs, num_outputs, train_iter, test_iter, eps, batch_size)
+    net = train(num_inputs, num_outputs, train_iter, test_iter, eps)
     pred_labels = fmnist.get_labels(net(X).argmax(dim=1).numpy())
 
     titles = []

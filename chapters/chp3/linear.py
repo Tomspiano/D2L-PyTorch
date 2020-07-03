@@ -4,6 +4,10 @@ from modules import base
 from modules import d2lScratch as scratch
 
 
+def squared_loss(y_hat, y):
+    return (y_hat - y.reshape(y_hat.shape))**2 / 2
+
+
 def main():
     true_w = torch.tensor([2, -3.4])
     true_b = 4.2
@@ -33,7 +37,7 @@ def main():
 
         net = scratch.LinearNet([w, b]).net
 
-        loss = scratch.squared_loss  # 0.5 (y-y')^2
+        loss = squared_loss  # 0.5 (y-y')^2
 
     for epoch in range(num_epochs):
         # Assuming the number of examples can be divided by the batch size, all

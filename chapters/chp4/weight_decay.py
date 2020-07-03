@@ -36,7 +36,7 @@ def scratch_ver(num_inputs, train_iter, test_iter, num_epochs,
 
 def custom_ver(num_inputs, train_iter, test_iter, num_epochs,
                lr, wd):
-    # L2 norm of w:  0.008123248815536499
+    # L2 norm of w:  0.007476740516722202
     # if num_epochs = 100, learning rate = 0.003, weight decay = 100
     net = nn.Linear(num_inputs, 1)
 
