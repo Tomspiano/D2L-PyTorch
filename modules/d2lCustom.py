@@ -136,6 +136,41 @@ class VGG11(nn.Module):
         return self.net(x)
 
 
+class NiN(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+        self.net = nn.Sequential(
+                self.nin_block(1, 96, kernel_size=11, strides=4, padding=0),
+                nn.MaxPool2d(3, stride=2),
+                self.nin_block(96, 256, kernel_size=5, strides=1, padding=2),
+                nn.MaxPool2d(3, stride=2),
+                self.nin_block(256, 384, kernel_size=3, strides=1, padding=1),
+                nn.MaxPool2d(3, stride=2),
+                nn.Dropout(0.5),
+                # There are 10 label classes
+                self.nin_block(384, 10, kernel_size=3, strides=1, padding=1),
+                # The global average pooling layer automatically sets the window shape
+                # to the height and width of the input
+                nn.AdaptiveMaxPool2d((1, 1)),
+                # Transform the four-dimensional output into two-dimensional output
+                # with a shape of (batch size, 10)
+                FlattenLayer()
+        )
+
+    @staticmethod
+    def nin_block(in_channels, out_channels, kernel_size, strides, padding):
+        return nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, kernel_size, strides, padding),
+                nn.ReLU(),
+                nn.Conv2d(out_channels, out_channels, kernel_size=1), nn.ReLU(),
+                nn.Conv2d(out_channels, out_channels, kernel_size=1), nn.ReLU()
+        )
+
+    def forward(self, x):
+        return self.net(x)
+
+
 def arch(x, layers):
     for layer in layers:
         x = layer(x)
@@ -145,7 +180,7 @@ def arch(x, layers):
 
 if __name__ == '__main__':
     size = (1, 1, 224, 224)
-    nets = [VGG11().net]
+    nets = [NiN().net]
     X = torch.randn(size, dtype=torch.float32)
     for net in nets:
         X = arch(X, net)
