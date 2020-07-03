@@ -11,15 +11,15 @@ def main():
     lr, eps = .001, 1e-3
     # lr, eps = .001, 1e-1
 
-    root = './Datasets'
+    root = '../../Datasets'
     train_iter, test_iter = fmnist.load_data(batch_size, root=root)
 
     net = custom.LeNet()
     optimizer = torch.optim.Adam(net.parameters(), lr)
     loss = nn.CrossEntropyLoss()
 
-    base.train(net, train_iter, test_iter, loss, eps, batch_size, optimizer=optimizer)
-    # epoch 23, loss 0.0015, train acc 0.859, test acc 0.851
+    base.train(net, train_iter, test_iter, loss, eps=eps, optimizer=optimizer)
+    # epoch 24, loss 0.358, train acc 0.867, test acc 0.854, 132.3 examples/sec
     # if eps = 1e-3, learning rate = 0.001
 
 
