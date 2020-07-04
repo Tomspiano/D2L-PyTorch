@@ -1,7 +1,6 @@
 import torch
 from torch import nn
 from torch.utils import data as Data
-import os
 import time
 import numpy as np
 from IPython import display
@@ -189,10 +188,7 @@ def train(net, train_iter, test_iter, loss, eps=None, num_epochs=0,
     if isinstance(net, nn.Module):
         net.to(device)
 
-    if checkpoint is None:
-        epoch = 0
-    else:
-        epoch = checkpoint['epoch'] + 1
+    epoch = 0 if checkpoint is None else checkpoint['epoch']
 
     timer = Timer()
     train_accurate = 0
@@ -219,19 +215,19 @@ def train(net, train_iter, test_iter, loss, eps=None, num_epochs=0,
             timer.stop()
 
         epoch += 1
-        train_loss, train_acc = metric[0] / metric[2], metric[1] / metric[2]
-        t = metric[2] / timer.sum()
-        test_acc = evaluate_accuracy(test_iter, net)
-        print('epoch %d, loss %.3f, train acc %.3f, test acc %.3f, %.1f examples/sec'
-              % (epoch, train_loss, train_acc, test_acc, t))
-
         if checkpoint_path is not None:
             ckpt = {
                 'net'      : net.state_dict(),
                 'optimizer': optimizer.state_dict(),
                 'epoch'    : epoch
             }
-            torch.save(ckpt, checkpoint_path + '/{}.pt'.format(os.path.basename(__file__)[:3]))
+            torch.save(ckpt, checkpoint_path)
+
+        train_loss, train_acc = metric[0] / metric[2], metric[1] / metric[2]
+        t = metric[2] / timer.sum()
+        test_acc = evaluate_accuracy(test_iter, net)
+        print('epoch %d, loss %.3f, train acc %.3f, test acc %.3f, %.1f examples/sec'
+              % (epoch, train_loss, train_acc, test_acc, t))
 
         if abs(train_acc - train_accurate) < eps and epoch >= num_epochs:
             break
@@ -259,7 +255,7 @@ def evaluate_accuracy(data_iter, net, device=None):
     return metric[0] / metric[1]
 
 
-def evaluate_loss(net, data_iter, loss):  # @save
+def evaluate_loss(net, data_iter, loss):
     """Evaluate the loss of a model on the given dataset."""
     metric = Accumulator(2)  # Sum of losses, no. of examples
     for X, y in data_iter:

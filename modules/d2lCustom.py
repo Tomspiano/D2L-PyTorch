@@ -103,10 +103,11 @@ class AlexNet(nn.Module):
 
 
 class VGG11(nn.Module):
-    def __init__(self):
+    def __init__(self, ratio=1):
         super().__init__()
 
-        self.conv_arch = ((1, 64), (1, 128), (2, 256), (2, 512), (2, 512))
+        self.conv_arch_def = ((1, 64), (1, 128), (2, 256), (2, 512), (2, 512))
+        self.conv_arch = [(pair[0], pair[1] // ratio) for pair in self.conv_arch_def]
 
         # The convulational layer part
         conv_blks = []

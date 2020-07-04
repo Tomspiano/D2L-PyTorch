@@ -2,9 +2,12 @@
   <dictionary name="28971">
     <words>
       <w>asnumpy</w>
+      <w>blks</w>
       <w>ckpt</w>
       <w>conv</w>
       <w>convolutional</w>
+      <w>convs</w>
+      <w>convulational</w>
       <w>cuda</w>
       <w>cumsum</w>
       <w>dataloader</w>
@@ -12,6 +15,7 @@
       <w>datasets</w>
       <w>figsize</w>
       <w>fmnist</w>
+      <w>goog</w>
       <w>hiddens</w>
       <w>matplotlib</w>
       <w>minibatch</w>
@@ -25,6 +29,7 @@
       <w>pred</w>
       <w>relu</w>
       <w>softmax</w>
+      <w>tomspiano</w>
       <w>vals</w>
       <w>xlabel</w>
       <w>xlim</w>
