@@ -191,7 +191,7 @@ def train(net, train_iter, test_iter, loss, eps=None, num_epochs=0,
     epoch = 0 if checkpoint is None else checkpoint['epoch']
 
     timer = Timer()
-    train_accurate = 0
+    pre_loss = 0
     while True:
         metric = Accumulator(3)  # train_loss, train_acc, num_examples
 
@@ -229,10 +229,10 @@ def train(net, train_iter, test_iter, loss, eps=None, num_epochs=0,
         print('epoch %d, loss %.3f, train acc %.3f, test acc %.3f, %.1f examples/sec'
               % (epoch, train_loss, train_acc, test_acc, t))
 
-        if abs(train_acc - train_accurate) < eps and epoch >= num_epochs:
+        if abs(train_loss - pre_loss) < eps and epoch >= num_epochs:
             break
         else:
-            train_accurate = train_acc
+            pre_loss = train_loss
 
 
 # evaluate
