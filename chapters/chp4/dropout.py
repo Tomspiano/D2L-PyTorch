@@ -11,7 +11,7 @@ from modules import d2lCustom as custom
 ## inverted_dropout
 
 def train(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps, drop_prob):
-    # epoch 12, loss 0.333, train acc 0.877, test acc 0.859, 1720.4 examples/sec
+    # epoch 25, loss 0.272, train acc 0.898, test acc 0.860, 467.3 examples/sec
     # if eps = 1e-3, learning rate = 0.5
     cnt = len(num_hiddens) + 1
     odict = OrderedDict()

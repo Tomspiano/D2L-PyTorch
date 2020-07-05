@@ -7,7 +7,7 @@ from modules import d2lCustom as custom
 
 
 def train(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps):
-    # epoch 14, loss 0.276, train acc 0.897, test acc 0.880, 2461.6 examples/sec
+    # epoch 46, loss 0.155, train acc 0.943, test acc 0.883, 546.2 examples/sec
     # if eps = 1e-3, learning rate = 0.5
 
     net = nn.Sequential(

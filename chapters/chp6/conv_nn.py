@@ -19,7 +19,7 @@ def main():
     loss = nn.CrossEntropyLoss()
 
     base.train(net, train_iter, test_iter, loss, eps=eps, optimizer=optimizer)
-    # epoch 24, loss 0.358, train acc 0.867, test acc 0.854, 132.3 examples/sec
+    # epoch 29, loss 0.338, train acc 0.875, test acc 0.863, 93.3 examples/sec
     # if eps = 1e-3, learning rate = 0.001
 
 
