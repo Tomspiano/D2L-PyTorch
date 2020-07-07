@@ -24,7 +24,7 @@ def train(num_inputs, num_hiddens, num_outputs, train_iter, test_iter, eps):
 
     optimizer = torch.optim.SGD(net.parameters(), lr=.5)
 
-    base.train(net, train_iter, test_iter, loss, eps=eps, optimizer=optimizer)
+    base.train(net, train_iter, test_iter, loss, eps=eps, num_epochs=50, optimizer=optimizer)
 
 
 def main():

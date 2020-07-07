@@ -30,7 +30,6 @@ def main():
                optimizer=optimizer, checkpoint_path=ckpt_path, checkpoint=ckpt)
     # epoch 15, loss 0.163, train acc 0.939, test acc 0.917, 2.2 examples/sec
     # if eps = 1e-3, learning rate = 0.001
-    # TODO(Tomspiano) To be continue
 
 
 if __name__ == '__main__':

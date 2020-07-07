@@ -18,7 +18,7 @@ def main():
     optimizer = torch.optim.Adam(net.parameters(), lr)
     loss = nn.CrossEntropyLoss()
 
-    base.train(net, train_iter, test_iter, loss, eps=eps, optimizer=optimizer)
+    base.train(net, train_iter, test_iter, loss, eps=eps, num_epochs=50, optimizer=optimizer)
     # epoch 29, loss 0.338, train acc 0.875, test acc 0.863, 93.3 examples/sec
     # if eps = 1e-3, learning rate = 0.001
 
