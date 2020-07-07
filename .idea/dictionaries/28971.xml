@@ -15,6 +15,7 @@
       <w>datasets</w>
       <w>figsize</w>
       <w>fmnist</w>
+      <w>gitignore</w>
       <w>goog</w>
       <w>hiddens</w>
       <w>matplotlib</w>
@@ -30,6 +31,7 @@
       <w>relu</w>
       <w>softmax</w>
       <w>tomspiano</w>
+      <w>untrack</w>
       <w>vals</w>
       <w>xlabel</w>
       <w>xlim</w>
