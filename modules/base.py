@@ -181,7 +181,7 @@ def try_gpu(i=0):
 
 
 # train
-def train(net, train_iter, test_iter, loss, eps=None, num_epochs=0,
+def train(net, train_iter, test_iter, loss, eps=None, num_epochs=15,
           optimizer=None, device=try_gpu(),
           checkpoint_path=None, checkpoint=None):
     print('training on', device)
@@ -193,6 +193,9 @@ def train(net, train_iter, test_iter, loss, eps=None, num_epochs=0,
     timer = Timer()
     pre_loss = 0
     while True:
+        if epoch >= num_epochs:
+            break
+
         metric = Accumulator(3)  # train_loss, train_acc, num_examples
 
         for X, y in train_iter:
@@ -229,7 +232,7 @@ def train(net, train_iter, test_iter, loss, eps=None, num_epochs=0,
         print('epoch %d, loss %.3f, train acc %.3f, test acc %.3f, %.1f examples/sec'
               % (epoch, train_loss, train_acc, test_acc, t))
 
-        if abs(train_loss - pre_loss) < eps and epoch >= num_epochs:
+        if abs(train_loss - pre_loss) < eps:
             break
         else:
             pre_loss = train_loss
