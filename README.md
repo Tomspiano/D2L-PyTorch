@@ -20,7 +20,7 @@ This repository contains my learning notes for *Dive into Deep Learning*. The co
   - [Networks with Parallel Concatenations (GoogLeNet)](https://github.com/Tomspiano/D2L-PyTorch/blob/master/chapters/chp7/GoogLeNet.py)
   - [Batch Normalization](https://github.com/Tomspiano/D2L-PyTorch/blob/master/chapters/chp7/batch_norm.py)
   - [Residual Networks (ResNet)](https://github.com/Tomspiano/D2L-PyTorch/blob/master/chapters/chp7/ResNet.py)
-  - [Densely Connected Networks (DenseNet)](https://github.com/Tomspiano/D2L-PyTorch/blob/master/chapters/chp7/dense_n.py)
+  - [Densely Connected Networks (DenseNet)](https://github.com/Tomspiano/D2L-PyTorch/blob/master/chapters/chp7/DenseNet.py)
 - **Kaggle**
   - [Predicting House Prices](https://github.com/Tomspiano/D2L-PyTorch/blob/master/Kaggle/HousePrices)
 
